@@ -6,6 +6,7 @@ public class EditorDetexto {
         texto = removeEspacosInicioFim(texto);
         texto = removeSimbolosDoInico(texto);
         texto = removeSimbuloDoFinal(texto);
+        texto = espacoDepoisDaVirgula(texto);
         return texto;
     }
     public String removeEspacosInicioFim (String texto){
@@ -37,6 +38,21 @@ public class EditorDetexto {
 
         }
         return texto;
+    }
+    public String espacoDepoisDaVirgula (String texto){
+        for (int i = 0; i < texto.length(); i++){
+            // em i é uma virgula E em i+1 letra ou Simbulo -> adiciona espaço e depois adiciona o restante da string
+            if (ehVirgula(texto.charAt(i)) && (!ehNumero(texto.charAt(i+1)) || ehSimbulo(texto.charAt(i+1)))){
+                texto = texto.substring(0,i+1) + " " + texto.substring(i+1,texto.length());
+            }
+        }
+        return texto;
+    }
+    public boolean ehVirgula(char letra){
+        if(letra == ','){
+            return true;
+        }
+        return false;
     }
     public boolean ehLetradoAlfabetoAZ(char letra){
         letra = Character.toLowerCase(letra);
