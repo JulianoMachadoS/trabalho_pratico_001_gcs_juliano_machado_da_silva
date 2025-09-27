@@ -7,6 +7,28 @@ public class EditorDetexto {
         texto = removeSimbolosDoInico(texto);
         texto = removeSimbuloDoFinal(texto);
         texto = espacoDepoisDaVirgula(texto);
+        texto = removeEspacosDuplos(texto);
+        texto = espacosEntreNumeroEletra(texto);
+        return texto;
+    }
+    public String espacosEntreNumeroEletra (String texto){
+        for (int i = 0; i < texto.length(); i++){
+            if (ehNumero(texto.charAt(i)) && !ehNumero(texto.charAt(i-1)) && texto.charAt(i-1) != ' ' && texto.charAt(i-1) != '.'){
+                texto = texto.substring(0,i) + ' ' + texto.substring(i, texto.length());
+            }
+            if (ehNumero(texto.charAt(i)) && !ehNumero(texto.charAt(i+1)) && texto.charAt(i+1) != ' ' && texto.charAt(i+1) != '.'){
+                texto = texto.substring(0,i+1) + ' ' + texto.substring(i+1, texto.length());
+            }
+        }
+        return texto;
+    }
+    public String removeEspacosDuplos(String texto){
+        for (int i = 0 ; i < texto.length() - 1; i++){
+            if (texto.charAt(i) == ' ' && texto.charAt(i+1) == ' '){
+                texto = texto.substring(0,i) + texto.substring(i+1);
+                i--;
+            }
+        }
         return texto;
     }
     public String removeEspacosInicioFim (String texto){
