@@ -7,15 +7,17 @@ public class Main {
         EditorDetexto et = new EditorDetexto();
         System.out.print("\f");
         String textoTeste = "   Palavra Para teste  ";
-
+        imprimeMenu ();
+        int contador = 1;
         boolean loop = false;
         while (!loop == true){// inicio do menu de teste
-            System.out.println("Texto original: " + textoTeste);
-            System.out.println(et.editorDeTexto(textoTeste));
-            loop = parasistema();
+            System.out.println("Texto original: (" + textoTeste + ")");
+            System.out.println("Texto editado: (" + et.editorDeTexto(textoTeste)+")");
+            loop = parasistema(contador);
+            contador ++;
         }
     }
-    public static boolean parasistema(){
+    public static boolean parasistema(int contador){
         Scanner teclado = new Scanner (System.in);
         System.out.println("\nDigite 1 para SAIR ou qualquer outra coisa para Reiniciar");
         String sair = teclado.nextLine();
@@ -23,7 +25,10 @@ public class Main {
             System.out.println("FIM DO TESTE\n");
             return true;
         }
-        System.out.println("----------------- TESTE REINICIADO ---------------------");
+        System.out.println("----------------- TESTE REINICIADO / teste "+ contador + " ----------");
         return false;
+    }
+    public static void imprimeMenu (){
+        System.out.println("-----------------TESTE DO EDITOR-----------------\n");
     }
 }
