@@ -9,6 +9,33 @@ public class EditorDetexto {
         texto = espacoDepoisDaVirgula(texto);
         texto = removeEspacosDuplos(texto);
         texto = espacosEntreNumeroEletra(texto);
+        texto = primeiraLetraMaiuscula(texto);
+        texto = maiusculaDepoisDoPonto(texto);
+        texto = adicionaPontoFinal(texto);
+        return texto;
+    }
+    public String adicionaPontoFinal (String texto){
+        if (texto.charAt(texto.length()-1) != '.' && (texto.charAt(texto.length()-1) != '?' && texto.charAt(texto.length()-1) != '!')){
+            texto = texto + '.';
+        }
+        return texto;
+    }
+    public String maiusculaDepoisDoPonto (String texto){
+        for (int i = 0; i < texto.length() - 1; i++){
+            if ((texto.charAt(i) == '.'|| texto.charAt(i) == '?' || texto.charAt(i) == '!') && (ehLetradoAlfabetoAZ(texto.charAt(i+1))
+                    || (texto.charAt(i+1) == ' ' && ehLetradoAlfabetoAZ(texto.charAt(i+2))))){
+                //se for "." ou "?" ou "!" E letra do alfabeto a sucessão (i+1) entra no if
+                if(ehLetradoAlfabetoAZ(texto.charAt(i+1))){
+                    texto = texto.substring(0,i+1) + " " + Character.toUpperCase(texto.charAt(i+1)) + texto.substring(i+2, texto.length());
+                }else if (texto.charAt(i+1) == ' '){
+                    texto = texto.substring(0,i+2) + Character.toUpperCase(texto.charAt(i+2)) + texto.substring(i+3, texto.length());
+                }
+            }
+        }
+        return texto;
+    }
+    public String primeiraLetraMaiuscula(String texto){
+        texto = texto.substring(0,1).toUpperCase() + texto.substring(1);
         return texto;
     }
     public String espacosEntreNumeroEletra (String texto){
